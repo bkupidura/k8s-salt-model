@@ -1,4 +1,3 @@
-
 ================================================
 k8s-salt-model Reclass Model
 ================================================
@@ -15,7 +14,7 @@ ctl01
 ctl02
 ctl03
 
-Kubernetes computes 
+Kubernetes computes
 ===================
 
 cmp01

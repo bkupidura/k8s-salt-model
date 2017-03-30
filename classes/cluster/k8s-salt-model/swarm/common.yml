@@ -1,0 +1,13 @@
+classes:
+  - system.docker.host
+parameters:
+  _param:
+    cluster_vip_address: 127.0.0.1
+    cluster_public_host: 127.0.0.1
+  docker:
+    client:
+      enabled: true
+      compose:
+        source:
+          engine: docker
+          image: "docker/compose:1.8.0"

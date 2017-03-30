@@ -25,12 +25,21 @@ parameters:
         kubernetes_control_node01:
           params:
             deploy_address: ${_param:kubernetes_control_node01_deploy_address}
+          classes:
+          - system.glusterfs.server.cluster
+          - system.glusterfs.server.volume.prometheus
         kubernetes_control_node02:
           params:
             deploy_address: ${_param:kubernetes_control_node02_deploy_address}
+          classes:
+          - system.glusterfs.server.cluster
+          - system.glusterfs.server.volume.prometheus
         kubernetes_control_node03:
           params:
             deploy_address: ${_param:kubernetes_control_node03_deploy_address}
+          classes:
+          - system.glusterfs.server.cluster
+          - system.glusterfs.server.volume.prometheus
         kubernetes_compute_node01:
           name: ${_param:kubernetes_compute_node01_hostname}
           domain: ${_param:cluster_domain}
@@ -51,3 +60,36 @@ parameters:
             linux_system_codename: xenial
             deploy_address: ${_param:kubernetes_compute_node02_deploy_address}
             single_address: ${_param:kubernetes_compute_node02_single_address}
+        docker_swarm_node01:
+          name: ${_param:docker_swarm_node01_hostname}
+          domain: ${_param:cluster_domain}
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            deploy_address: ${_param:docker_swarm_node01_deploy_address}
+            single_address: ${_param:docker_swarm_node01_address}
+          classes:
+          - cluster.k8s-salt-model.swarm.master
+          - cluster.${_param:cluster_name}.monitoring
+        docker_swarm_node02:
+          name: ${_param:docker_swarm_node02_hostname}
+          domain: ${_param:cluster_domain}
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            deploy_address: ${_param:docker_swarm_node02_deploy_address}
+            single_address: ${_param:docker_swarm_node02_address}
+          classes:
+          - cluster.k8s-salt-model.swarm.slave
+          - cluster.${_param:cluster_name}.monitoring
+        docker_swarm_node03:
+          name: ${_param:docker_swarm_node03_hostname}
+          domain: ${_param:cluster_domain}
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            deploy_address: ${_param:docker_swarm_node03_deploy_address}
+            single_address: ${_param:docker_swarm_node03_address}
+          classes:
+          - cluster.k8s-salt-model.swarm.slave
+          - cluster.${_param:cluster_name}.monitoring

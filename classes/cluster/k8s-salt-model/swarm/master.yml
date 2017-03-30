@@ -1,0 +1,9 @@
+classes:
+  - cluster.k8s-salt-model.swarm.common
+  - system.docker.swarm.master
+  - system.docker.client
+parameters:
+  docker:
+    swarm:
+      role: master
+      advertise_addr: ${_param:single_address}

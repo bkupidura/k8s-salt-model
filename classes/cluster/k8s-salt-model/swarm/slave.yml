@@ -1,0 +1,8 @@
+classes:
+  - cluster.k8s-salt-model.swarm.common
+  - system.docker.swarm.manager
+parameters:
+  docker:
+    swarm:
+      master:
+        host: ${_param:docker_swarm_node01_address}

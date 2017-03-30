@@ -5,6 +5,8 @@ classes:
 - system.openssh.server.team.tcpcloud
 - system.openssh.server.team.mcp_qa
 - system.openssh.server.team.lab
+- system.linux.system.repo.influxdb
+- system.telegraf.agent
 - cluster.k8s-salt-model.infra
 - cluster.k8s-salt-model.kubernetes
 parameters: 
@@ -47,11 +49,101 @@ parameters:
     kubernetes_compute_node01_single_address: 172.16.10.105
     kubernetes_compute_node02_single_address: 172.16.10.106
 
+    glusterfs_service_host: ${_param:kubernetes_control_address}
+    docker_swarm_node01_hostname: sup01
+    docker_swarm_node02_hostname: sup02
+    docker_swarm_node03_hostname: sup03
+    docker_swarm_node01_address: 172.16.10.120
+    docker_swarm_node02_address: 172.16.10.121
+    docker_swarm_node03_address: 172.16.10.122
+    docker_swarm_node01_deploy_address: 192.168.10.120
+    docker_swarm_node02_deploy_address: 192.168.10.121
+    docker_swarm_node03_deploy_address: 192.168.10.122
+
     ##FIXME if ntp defined
     #ntp_strata_host1: 
-    #ntp_strata_host2: 
+    #ntp_strata_host2:
+  telegraf:
+    agent:
+      enabled: true
+      interval: 15
+      round_interval: false
+      metric_batch_size: 1000
+      metric_buffer_limit: 10000
+      collection_jitter: 2
+      input:
+        diskio:
+      output:
+        prometheus_client:
+          bind:
+            address: 0.0.0.0
+            port: 9126
+          engine: prometheus
   linux:
     network:
+      host:
+        ctl:
+          address: ${_param:kubernetes_control_address}
+          names:
+          - ${_param:kubernetes_control_hostname}
+          - ${_param:kubernetes_control_hostname}.${_param:cluster_domain}
+        ctl01:
+          address: ${_param:kubernetes_control_node01_address}
+          names:
+          - ${_param:kubernetes_control_node01_hostname}
+          - ${_param:kubernetes_control_node01_hostname}.${_param:cluster_domain}
+        ctl02:
+          address: ${_param:kubernetes_control_node02_address}
+          names:
+          - ${_param:kubernetes_control_node02_hostname}
+          - ${_param:kubernetes_control_node02_hostname}.${_param:cluster_domain}
+        ctl03:
+          address: ${_param:kubernetes_control_node03_address}
+          names:
+          - ${_param:kubernetes_control_node03_hostname}
+          - ${_param:kubernetes_control_node03_hostname}.${_param:cluster_domain}
+        cmp01:
+          address: ${_param:kubernetes_compute_node01_single_address}
+          names:
+          - ${_param:kubernetes_compute_node01_hostname}
+          - ${_param:kubernetes_compute_node01_hostname}.${_param:cluster_domain}
+        cmp02:
+          address: ${_param:kubernetes_compute_node02_single_address}
+          names:
+          - ${_param:kubernetes_compute_node02_hostname}
+          - ${_param:kubernetes_compute_node02_hostname}.${_param:cluster_domain}
+        sup01:
+          address: ${_param:docker_swarm_node01_address}
+          names:
+          - ${_param:docker_swarm_node01_hostname}
+          - ${_param:docker_swarm_node01_hostname}.${_param:cluster_domain}
+        sup02:
+          address: ${_param:docker_swarm_node02_address}
+          names:
+          - ${_param:docker_swarm_node02_hostname}
+          - ${_param:docker_swarm_node02_hostname}.${_param:cluster_domain}
+        sup03:
+          address: ${_param:docker_swarm_node03_address}
+          names:
+          - ${_param:docker_swarm_node03_hostname}
+          - ${_param:docker_swarm_node03_hostname}.${_param:cluster_domain}
+      resolv:
+        dns:
+          - 10.254.0.10
+          - 172.18.176.4
+          - 172.18.176.5
+        domain: mcp-fuel-aio.local
+        search:
+          - bud.mirantis.net
+          - scc.mirantis.net
+          - vm.mirantis.net
+          - ssl.mirantis.net
+          - msk.mirantis.net
+          - srt.mirantis.net
+        options:
+          - ndots:5
+          - timeout:2
+          - attempts:2
       interface:
         ens4:
           enabled: true

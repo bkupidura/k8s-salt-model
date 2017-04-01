@@ -18,3 +18,16 @@ parameters:
     docker_image_alertmanager: alertmanager:latest
     docker_image_pushgateway: pushgateway:latest
     docker_image_prometheus: prometheus:latest
+  docker:
+    client:
+      service:
+        prometheus_server:
+          ports:
+            - ${_param:prometheus_server_expose_port}:${prometheus:server:bind:port}
+        prometheus_alertmanager:
+          ports:
+            - ${_param:prometheus_alertmanager_expose_port}:${prometheus:alertmanager:bind:port}
+        prometheus_pushgateway:
+          ports:
+            - ${_param:prometheus_pushgateway_expose_port}:9091
+

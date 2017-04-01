@@ -1,0 +1,33 @@
+classes:
+- system.nginx.server.single
+- cluster.k8s-salt-model
+parameters:
+  nginx:
+    server:
+      enabled: true
+      site:
+        nginx_proxy_prometheus:
+          enabled: true
+          type: nginx_proxy
+          name: prometheus
+          proxy:
+            host: ${_param:prometheus_expose_address}
+            port: ${_param:prometheus_server_expose_port}
+            protocol: http
+          host:
+            name: 0.0.0.0
+            port: 8001
+            protocol: https
+        nginx_proxy_alertmanager:
+          enabled: true
+          type: nginx_proxy
+          name: alertmanager
+          proxy:
+            host: ${_param:prometheus_expose_address}
+            port: ${_param:prometheus_alertmanager_expose_port}
+            protocol: http
+          host:
+            name: 0.0.0.0
+            port: 8002
+            protocol: https
+

@@ -1,2 +1,4 @@
 classes:
   - cluster.k8s-salt-model.infra.config
+  - cluster.k8s-salt-model.monitoring.proxy
+

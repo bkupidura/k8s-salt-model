@@ -60,6 +60,11 @@ parameters:
     docker_swarm_node02_deploy_address: 192.168.10.121
     docker_swarm_node03_deploy_address: 192.168.10.122
 
+    prometheus_server_expose_port: 15010
+    prometheus_alertmanager_expose_port: 15011
+    prometheus_pushgateway_expose_port: 15012
+    prometheus_expose_address: ${_param:docker_swarm_node01_address}
+
     ##FIXME if ntp defined
     #ntp_strata_host1: 
     #ntp_strata_host2:

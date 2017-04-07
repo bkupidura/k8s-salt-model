@@ -19,6 +19,7 @@ parameters:
     salt_master_host: ${_param:infra_config_deploy_address}
     linux_system_codename: xenial
     apt_mk_version: nightly
+    cluster_public_host: ${_param:prometheus_control_address}
   reclass:
     storage:
       node:

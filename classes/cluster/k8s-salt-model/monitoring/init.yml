@@ -12,9 +12,12 @@ classes:
 - system.docker.swarm.service.monitoring.prometheus_pushgateway
 - system.docker.swarm.service.monitoring.prometheus_alertmanager
 - system.docker.swarm.service.monitoring.prometheus_server
+- system.docker.swarm.service.dashboard.grafana_server
 - cluster.k8s-salt-model
 parameters:
   _param:
     docker_image_alertmanager: alertmanager:latest
     docker_image_pushgateway: pushgateway:latest
     docker_image_prometheus: prometheus:latest
+    docker_image_grafana: grafana/grafana:latest
+    grafana_admin_password: admin

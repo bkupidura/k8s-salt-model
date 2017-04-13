@@ -9,11 +9,8 @@ classes:
 - service.prometheus.server.container
 - service.prometheus.alertmanager.container
 - service.prometheus.pushgateway.container
-- system.docker.swarm.network.monitoring
-- system.docker.swarm.service.monitoring.prometheus_pushgateway
-- system.docker.swarm.service.monitoring.prometheus_alertmanager
-- system.docker.swarm.service.monitoring.prometheus_server
-- system.docker.swarm.service.dashboard.grafana_server
+- system.docker.swarm.stack.monitoring
+- system.docker.swarm.stack.dashboard
 - cluster.k8s-salt-model
 parameters:
   _param:

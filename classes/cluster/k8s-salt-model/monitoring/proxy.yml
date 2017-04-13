@@ -1,0 +1,5 @@
+classes:
+- system.nginx.server.single
+- system.nginx.server.proxy.monitoring.prometheus_server
+- system.nginx.server.proxy.monitoring.prometheus_alertmanager
+- cluster.k8s-salt-model

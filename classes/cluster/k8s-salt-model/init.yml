@@ -61,6 +61,8 @@ parameters:
     docker_swarm_node02_deploy_address: 192.168.10.121
     docker_swarm_node03_deploy_address: 192.168.10.122
 
+    prometheus_control_address: 172.16.10.252
+
     ##FIXME if ntp defined
     #ntp_strata_host1: 
     #ntp_strata_host2:

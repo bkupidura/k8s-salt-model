@@ -19,6 +19,7 @@ parameters:
     salt_master_host: ${_param:infra_config_deploy_address}
     linux_system_codename: xenial
     apt_mk_version: nightly
+    cluster_public_host: ${_param:prometheus_control_address}
   reclass:
     storage:
       node:
@@ -68,6 +69,7 @@ parameters:
             linux_system_codename: xenial
             deploy_address: ${_param:docker_swarm_node01_deploy_address}
             single_address: ${_param:docker_swarm_node01_address}
+            keepalived_vip_priority: 100
           classes:
           - cluster.k8s-salt-model.swarm.master
           - cluster.${_param:cluster_name}.monitoring
@@ -79,6 +81,7 @@ parameters:
             linux_system_codename: xenial
             deploy_address: ${_param:docker_swarm_node02_deploy_address}
             single_address: ${_param:docker_swarm_node02_address}
+            keepalived_vip_priority: 101
           classes:
           - cluster.k8s-salt-model.swarm.slave
           - cluster.${_param:cluster_name}.monitoring
@@ -90,6 +93,7 @@ parameters:
             linux_system_codename: xenial
             deploy_address: ${_param:docker_swarm_node03_deploy_address}
             single_address: ${_param:docker_swarm_node03_address}
+            keepalived_vip_priority: 102
           classes:
           - cluster.k8s-salt-model.swarm.slave
           - cluster.${_param:cluster_name}.monitoring

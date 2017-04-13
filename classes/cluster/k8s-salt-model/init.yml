@@ -7,6 +7,7 @@ classes:
 - system.openssh.server.team.lab
 - system.linux.system.repo.influxdb
 - system.telegraf.agent
+- service.telegraf.agent
 - cluster.k8s-salt-model.infra
 - cluster.k8s-salt-model.kubernetes
 parameters: 

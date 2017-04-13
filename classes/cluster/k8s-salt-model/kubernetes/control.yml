@@ -27,6 +27,8 @@ parameters:
         ssl:
           enabled: true
       network:
+        prometheus:
+          enabled: true
         etcd:
           ssl:
             enabled: true

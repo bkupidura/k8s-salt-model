@@ -9,6 +9,8 @@ parameters:
   kubernetes:
     pool:
       network:
+        prometheus:
+          enabled: true
         etcd:
           ssl:
             enabled: true

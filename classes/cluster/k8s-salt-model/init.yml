@@ -5,7 +5,7 @@ classes:
 - system.openssh.server.team.tcpcloud
 - system.openssh.server.team.mcp_qa
 - system.openssh.server.team.lab
-- system.linux.system.repo.influxdb
+- system.linux.system.repo.mcp.extra
 - system.telegraf.agent
 - service.telegraf.agent
 - cluster.k8s-salt-model.infra
@@ -15,6 +15,7 @@ parameters:
     cluster_domain: mcp-fuel-aio.local
     reclass_data_revision: master
     cluster_name: k8s-salt-model
+    apt_mk_version: nightly
 
     # cert parameters
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
